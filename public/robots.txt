@@ -1,0 +1,28 @@
+# ============================================================
+# KYNEXIS HEALTH CLINIC — ROBOTS.TXT
+# Production Search Engine Crawl Rules
+# Canonical Domain: https://kynexishealth.com
+# ============================================================
+
+User-agent: *
+Allow: /
+Allow: /about
+Allow: /specialties
+Allow: /services
+Allow: /doctors
+Allow: /why-kynexis
+Allow: /patient-resources
+Allow: /contact
+Allow: /assets/
+
+# Disallow administrative consoles, patient portal sensitive URLs, and API endpoints
+Disallow: /api/
+Disallow: /devmode
+Disallow: /portal
+Disallow: /*?*devmode*
+Disallow: /*?*token=*
+Disallow: /*?*session=*
+Disallow: /*?*patientId=*
+
+# Sitemap location for Googlebot, Bingbot, and other crawlers
+Sitemap: https://kynexishealth.com/sitemap.xml

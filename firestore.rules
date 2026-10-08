@@ -1,0 +1,84 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Helper functions
+    function isValidId(id) {
+      return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    function incoming() {
+      return request.resource.data;
+    }
+
+    function existing() {
+      return resource.data;
+    }
+
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isOwner(userId) {
+      return isSignedIn() && request.auth.uid == userId;
+    }
+
+    // Test connection doc for boot-time connectivity check
+    match /test/{testId} {
+      allow read: if true;
+    }
+
+    // Global Settings & Real-Time Sync (Branding, Opening Page Media, Doctors, CMS, SEO)
+    match /settings/{settingId} {
+      allow get, list: if true;
+      allow create, update, delete: if true;
+    }
+
+    // Direct Doctors Directory Collection
+    match /doctors/{doctorId} {
+      allow get, list: if true;
+      allow create, update, delete: if true;
+    }
+
+    // Direct CMS Pages Collection
+    match /cms_pages/{pageId} {
+      allow get, list: if true;
+      allow create, update, delete: if true;
+    }
+
+    // Blog Posts Collection
+    match /blog_posts/{postId} {
+      allow get, list: if true;
+      allow create, update, delete: if true;
+    }
+
+    // User profiles
+    match /users/{userId} {
+      allow get: if true;
+      allow create, update, delete: if true;
+    }
+
+    // Appointments (Live booking & DevMode management)
+    match /appointments/{appointmentId} {
+      allow get, list: if true;
+      allow create, update, delete: if true;
+    }
+
+    // Medical records & Prescriptions
+    match /medical_records/{recordId} {
+      allow get, list: if true;
+      allow create, update, delete: if true;
+    }
+
+    // Public Contact Inquiries
+    match /inquiries/{inquiryId} {
+      allow get, list: if true;
+      allow create, update, delete: if true;
+    }
+
+    // Default catch-all
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

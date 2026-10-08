@@ -1,0 +1,6 @@
+{
+  "name": "Kynexis Health — Multi-Specialty Healthcare Clinic",
+  "description": "Premium multi-specialty healthcare clinic site with appointment booking, doctor directory, patient portal, HIPAA-compliant messaging, and local SEO architecture.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

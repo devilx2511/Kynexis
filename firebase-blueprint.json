@@ -1,0 +1,280 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "Patient user profile and contact information",
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "description": "Firebase Auth UID of the user",
+          "maxLength": 128
+        },
+        "fullName": {
+          "type": "string",
+          "description": "Full legal name of the patient",
+          "maxLength": 100
+        },
+        "email": {
+          "type": "string",
+          "description": "Email address of the patient",
+          "maxLength": 150
+        },
+        "phone": {
+          "type": "string",
+          "description": "Contact phone number",
+          "maxLength": 25
+        },
+        "authProvider": {
+          "type": "string",
+          "description": "Method of authentication (google, password, phone, anonymous)",
+          "maxLength": 30
+        },
+        "bloodGroup": {
+          "type": "string",
+          "description": "Blood group of the patient",
+          "maxLength": 10
+        },
+        "emergencyContact": {
+          "type": "string",
+          "description": "Emergency contact name and phone",
+          "maxLength": 150
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "Creation timestamp in ISO format",
+          "maxLength": 50
+        },
+        "updatedAt": {
+          "type": "string",
+          "description": "Last update timestamp in ISO format",
+          "maxLength": 50
+        }
+      },
+      "required": ["userId", "email"]
+    },
+    "AppSetting": {
+      "title": "AppSetting",
+      "description": "Global application, brand, opening page, doctors, and CMS settings synced live worldwide",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Setting key identifier (e.g. branding, cms, doctors, seo)",
+          "maxLength": 64
+        },
+        "updatedAt": {
+          "type": "string",
+          "description": "ISO timestamp of last update",
+          "maxLength": 50
+        }
+      }
+    },
+    "Appointment": {
+      "title": "Appointment",
+      "description": "Booked consultation or clinical visit record",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier of the appointment",
+          "maxLength": 128
+        },
+        "userId": {
+          "type": "string",
+          "description": "User ID of the patient who booked",
+          "maxLength": 128
+        },
+        "patientName": {
+          "type": "string",
+          "description": "Name of the patient attending the appointment",
+          "maxLength": 100
+        },
+        "patientPhone": {
+          "type": "string",
+          "description": "Patient phone number",
+          "maxLength": 25
+        },
+        "patientEmail": {
+          "type": "string",
+          "description": "Patient email address",
+          "maxLength": 150
+        },
+        "doctorId": {
+          "type": "string",
+          "description": "ID of the assigned specialist doctor",
+          "maxLength": 64
+        },
+        "doctorName": {
+          "type": "string",
+          "description": "Name of the doctor",
+          "maxLength": 100
+        },
+        "specialty": {
+          "type": "string",
+          "description": "Medical specialty",
+          "maxLength": 100
+        },
+        "date": {
+          "type": "string",
+          "description": "Date of appointment in YYYY-MM-DD format",
+          "maxLength": 20
+        },
+        "timeSlot": {
+          "type": "string",
+          "description": "Time slot for the appointment",
+          "maxLength": 30
+        },
+        "consultationType": {
+          "type": "string",
+          "description": "In-Person Clinic Visit or Video Tele-Consult",
+          "maxLength": 40
+        },
+        "location": {
+          "type": "string",
+          "description": "Clinic location branch name",
+          "maxLength": 150
+        },
+        "symptoms": {
+          "type": "string",
+          "description": "Brief description of symptoms or reason for visit",
+          "maxLength": 1000
+        },
+        "status": {
+          "type": "string",
+          "description": "Status of the appointment (confirmed, pending, completed, cancelled)",
+          "maxLength": 30
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "Timestamp when appointment was created",
+          "maxLength": 50
+        }
+      },
+      "required": ["patientName", "doctorId", "date", "timeSlot", "status"]
+    },
+    "MedicalRecord": {
+      "title": "MedicalRecord",
+      "description": "Patient medical record, prescription, or lab report summary",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique record identifier",
+          "maxLength": 128
+        },
+        "userId": {
+          "type": "string",
+          "description": "User ID of the patient",
+          "maxLength": 128
+        },
+        "title": {
+          "type": "string",
+          "description": "Record title (e.g. Echo-Cardiogram Report)",
+          "maxLength": 150
+        },
+        "category": {
+          "type": "string",
+          "description": "Category (Prescription, Lab Report, Radiology, Clinical Summary)",
+          "maxLength": 50
+        },
+        "doctorName": {
+          "type": "string",
+          "description": "Consulting doctor",
+          "maxLength": 100
+        },
+        "date": {
+          "type": "string",
+          "description": "Record date",
+          "maxLength": 30
+        },
+        "summary": {
+          "type": "string",
+          "description": "Clinical summary or doctor notes",
+          "maxLength": 2000
+        },
+        "fileUrl": {
+          "type": "string",
+          "description": "Optional attachment URL",
+          "maxLength": 500
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "Creation timestamp",
+          "maxLength": 50
+        }
+      },
+      "required": ["userId", "title", "category", "date"]
+    },
+    "Inquiry": {
+      "title": "Inquiry",
+      "description": "Patient general inquiry or contact message",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique inquiry ID",
+          "maxLength": 128
+        },
+        "fullName": {
+          "type": "string",
+          "description": "Inquirer name",
+          "maxLength": 100
+        },
+        "email": {
+          "type": "string",
+          "description": "Inquirer email",
+          "maxLength": 150
+        },
+        "phone": {
+          "type": "string",
+          "description": "Inquirer phone",
+          "maxLength": 25
+        },
+        "department": {
+          "type": "string",
+          "description": "Target clinical department",
+          "maxLength": 80
+        },
+        "message": {
+          "type": "string",
+          "description": "Inquiry message content",
+          "maxLength": 1500
+        },
+        "status": {
+          "type": "string",
+          "description": "Status (new, in-progress, resolved)",
+          "maxLength": 30
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "Submission timestamp",
+          "maxLength": 50
+        }
+      },
+      "required": ["fullName", "email", "message"]
+    }
+  },
+  "firestore": {
+    "/settings/{settingId}": {
+      "schema": "AppSetting",
+      "description": "Global application branding, opening page, doctors faculty, and CMS configuration synced in real-time"
+    },
+    "/users/{userId}": {
+      "schema": "UserProfile",
+      "description": "Private user profile documents"
+    },
+    "/appointments/{appointmentId}": {
+      "schema": "Appointment",
+      "description": "Patient appointments collection"
+    },
+    "/medical_records/{recordId}": {
+      "schema": "MedicalRecord",
+      "description": "Patient health records and prescriptions"
+    },
+    "/inquiries/{inquiryId}": {
+      "schema": "Inquiry",
+      "description": "Contact form inquiries and requests"
+    }
+  }
+}

@@ -79,7 +79,9 @@ export const DoctorsDirectory: React.FC<DoctorsDirectoryProps> = ({
           <div className="relative w-full sm:w-64 shrink-0">
             <Search className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
             <input
+              id="search-doctors"
               type="text"
+              aria-label="Search doctors by name or language"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search doctor, language..."
@@ -101,6 +103,10 @@ export const DoctorsDirectory: React.FC<DoctorsDirectoryProps> = ({
                   <img
                     src={doc.image}
                     alt={doc.name}
+                    width="80"
+                    height="80"
+                    loading="lazy"
+                    decoding="async"
                     className="w-20 h-20 rounded-2xl object-cover border-2 border-white shadow-md shrink-0 group-hover:scale-105 transition-transform duration-300"
                   />
                   <div>
@@ -177,6 +183,10 @@ export const DoctorsDirectory: React.FC<DoctorsDirectoryProps> = ({
                 <img
                   src={activeDoctorModal.image}
                   alt={activeDoctorModal.name}
+                  width="56"
+                  height="56"
+                  loading="lazy"
+                  decoding="async"
                   className="w-14 h-14 rounded-xl object-cover border border-white/30"
                 />
                 <div>
@@ -186,6 +196,7 @@ export const DoctorsDirectory: React.FC<DoctorsDirectoryProps> = ({
               </div>
               <button
                 onClick={() => setActiveDoctorModal(null)}
+                aria-label="Close doctor details"
                 className="p-2 rounded-lg text-slate-400 hover:text-white hover:bg-white/10"
               >
                 <X className="w-5 h-5" />

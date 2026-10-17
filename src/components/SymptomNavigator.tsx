@@ -116,6 +116,10 @@ export const SymptomNavigator: React.FC<SymptomNavigatorProps> = ({
                     <img
                       src={matchedDoctor.image}
                       alt={matchedDoctor.name}
+                      width="56"
+                      height="56"
+                      loading="lazy"
+                      decoding="async"
                       className="w-14 h-14 rounded-xl object-cover border border-white shadow-sm shrink-0"
                     />
                     <div>

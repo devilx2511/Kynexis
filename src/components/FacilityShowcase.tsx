@@ -90,6 +90,10 @@ export const FacilityShowcase: React.FC<FacilityShowcaseProps> = ({ currentLocat
               <img
                 src={facilities[activeTab].image}
                 alt={facilities[activeTab].title}
+                width="1200"
+                height="480"
+                loading="lazy"
+                decoding="async"
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
               />
 

@@ -163,6 +163,7 @@ export const Header: React.FC<HeaderProps> = ({
               setActiveTab('home');
               window.scrollTo({ top: 0, behavior: 'smooth' });
             }}
+            aria-label="Kynexis Health homepage"
             className="text-left focus:outline-none"
           >
             <BrandLogo size="md" variant={isDarkMode ? 'light' : 'dark'} />

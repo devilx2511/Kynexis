@@ -57,71 +57,81 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
     let angleX = 0.002;
     let angleY = 0.003;
 
+    let isVisible = true;
+    const observer = typeof IntersectionObserver !== 'undefined'
+      ? new IntersectionObserver(([entry]) => {
+          isVisible = entry.isIntersecting;
+        })
+      : null;
+    if (observer) observer.observe(canvas);
+
     const render = () => {
-      ctx.clearRect(0, 0, width, height);
+      if (!document.hidden && isVisible) {
+        ctx.clearRect(0, 0, width, height);
 
-      const centerX = width / 2;
-      const centerY = height / 2;
+        const centerX = width / 2;
+        const centerY = height / 2;
 
-      // Rotate nodes around center
-      nodes.forEach((node) => {
-        // Rotate Y
-        let x1 = node.rx * Math.cos(angleY) - node.rz * Math.sin(angleY);
-        let z1 = node.rx * Math.sin(angleY) + node.rz * Math.cos(angleY);
-        let y1 = node.ry;
+        // Rotate nodes around center
+        nodes.forEach((node) => {
+          // Rotate Y
+          let x1 = node.rx * Math.cos(angleY) - node.rz * Math.sin(angleY);
+          let z1 = node.rx * Math.sin(angleY) + node.rz * Math.cos(angleY);
+          let y1 = node.ry;
 
-        // Rotate X
-        let y2 = y1 * Math.cos(angleX) - z1 * Math.sin(angleX);
-        let z2 = y1 * Math.sin(angleX) + z1 * Math.cos(angleX);
-        let x2 = x1;
+          // Rotate X
+          let y2 = y1 * Math.cos(angleX) - z1 * Math.sin(angleX);
+          let z2 = y1 * Math.sin(angleX) + z1 * Math.cos(angleX);
+          let x2 = x1;
 
-        node.rx = x2;
-        node.ry = y2;
-        node.rz = z2;
+          node.rx = x2;
+          node.ry = y2;
+          node.rz = z2;
 
-        // Perspective project
-        const fov = 350;
-        const scale = fov / (fov + z2);
-        node.x = centerX + x2 * scale;
-        node.y = centerY + y2 * scale;
-      });
+          // Perspective project
+          const fov = 350;
+          const scale = fov / (fov + z2);
+          node.x = centerX + x2 * scale;
+          node.y = centerY + y2 * scale;
+        });
 
-      // Draw connections
-      for (let i = 0; i < numNodes; i++) {
-        for (let j = i + 1; j < numNodes; j++) {
-          const dx = nodes[i].x - nodes[j].x;
-          const dy = nodes[i].y - nodes[j].y;
-          const dist = Math.sqrt(dx * dx + dy * dy);
+        // Draw connections
+        for (let i = 0; i < numNodes; i++) {
+          for (let j = i + 1; j < numNodes; j++) {
+            const dx = nodes[i].x - nodes[j].x;
+            const dy = nodes[i].y - nodes[j].y;
+            const dist = Math.sqrt(dx * dx + dy * dy);
 
-          if (dist < 110) {
-            const alpha = (1 - dist / 110) * 0.25;
-            ctx.beginPath();
-            ctx.moveTo(nodes[i].x, nodes[i].y);
-            ctx.lineTo(nodes[j].x, nodes[j].y);
-            ctx.strokeStyle = `rgba(212, 175, 55, ${alpha})`;
-            ctx.lineWidth = 1;
-            ctx.stroke();
+            if (dist < 110) {
+              const alpha = (1 - dist / 110) * 0.25;
+              ctx.beginPath();
+              ctx.moveTo(nodes[i].x, nodes[i].y);
+              ctx.lineTo(nodes[j].x, nodes[j].y);
+              ctx.strokeStyle = `rgba(212, 175, 55, ${alpha})`;
+              ctx.lineWidth = 1;
+              ctx.stroke();
+            }
           }
         }
+
+        // Draw Nodes
+        nodes.forEach((node) => {
+          const scale = 350 / (350 + node.rz);
+          const radius = Math.max(1.5, 3.5 * scale);
+          const alpha = 0.4 + (node.rz + 180) / 360 * 0.6;
+
+          ctx.beginPath();
+          ctx.arc(node.x, node.y, radius, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(17, 34, 51, ${alpha})`;
+          ctx.fill();
+
+          // Inner gold core
+          ctx.beginPath();
+          ctx.arc(node.x, node.y, radius * 0.5, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(212, 175, 55, ${alpha})`;
+          ctx.fill();
+        });
       }
-
-      // Draw Nodes
-      nodes.forEach((node) => {
-        const scale = 350 / (350 + node.rz);
-        const radius = Math.max(1.5, 3.5 * scale);
-        const alpha = 0.4 + (node.rz + 180) / 360 * 0.6;
-
-        ctx.beginPath();
-        ctx.arc(node.x, node.y, radius, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(17, 34, 51, ${alpha})`;
-        ctx.fill();
-
-        // Inner gold core
-        ctx.beginPath();
-        ctx.arc(node.x, node.y, radius * 0.5, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(212, 175, 55, ${alpha})`;
-        ctx.fill();
-      });
 
       animationFrameId = requestAnimationFrame(render);
     };
@@ -130,6 +140,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
 
     return () => {
       cancelAnimationFrame(animationFrameId);
+      if (observer) observer.disconnect();
       window.removeEventListener('resize', handleResize);
     };
   }, []);
@@ -230,6 +241,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
               {/* Background Interactive 3D Canvas */}
               <canvas
                 ref={canvasRef}
+                aria-hidden="true"
                 className="absolute inset-0 w-full h-full pointer-events-none opacity-80"
               />
 

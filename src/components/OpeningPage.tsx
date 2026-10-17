@@ -67,7 +67,9 @@ export const OpeningPage: React.FC<OpeningPageProps> = ({
   };
 
   return (
-    <div
+    <main
+      id="main-content"
+      role="main"
       className={`min-h-screen w-full bg-[#050C16] text-white flex flex-col justify-between relative overflow-hidden select-none transition-all duration-700 ${
         isEntering ? 'opacity-0 scale-[0.98]' : 'opacity-100 scale-100'
       }`}
@@ -204,6 +206,10 @@ export const OpeningPage: React.FC<OpeningPageProps> = ({
               key={heroImageSrc}
               src={heroImageSrc}
               alt="Kynexis Health Luxury Reception & Diagnostic Suite"
+              width="1600"
+              height="900"
+              fetchPriority="high"
+              decoding="async"
               className="w-full h-full object-cover object-center transform scale-105 group-hover:scale-100 transition-all duration-700 ease-out animate-fade-in"
               referrerPolicy="no-referrer"
               onError={(e) => {
@@ -245,6 +251,7 @@ export const OpeningPage: React.FC<OpeningPageProps> = ({
               </div>
               <button
                 onClick={handleExplore}
+                aria-label="View Kolupukur Diagnostic and Outpatient Center"
                 className="px-3.5 py-1.5 rounded-xl bg-[#D4AF37] text-[#061424] text-xs font-bold hover:bg-[#FFF2B2] transition-colors shrink-0"
               >
                 View Center
@@ -253,6 +260,13 @@ export const OpeningPage: React.FC<OpeningPageProps> = ({
           </div>
         </div>
       </div>
+
+      {/* Crawlable Quick Links for Search Engine Bots & A11y */}
+      <nav aria-label="Direct Clinic Navigation" className="sr-only focus:not-sr-only relative z-30 p-4 bg-slate-900 text-white flex gap-4">
+        <a href="#specialties-section" onClick={(e) => { e.preventDefault(); onProceed('explore'); }}>Explore Specialties</a>
+        <a href="#doctors-section" onClick={(e) => { e.preventDefault(); onProceed('explore'); }}>Doctors & Faculty</a>
+        <a href="#contact-section" onClick={(e) => { e.preventDefault(); onProceed('explore'); }}>Contact & Location</a>
+      </nav>
 
       {/* BOTTOM BAR: Scroll Indicator & Footer */}
       <footer className="relative z-20 w-full max-w-[1700px] mx-auto px-6 sm:px-10 pb-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-400">
@@ -264,6 +278,7 @@ export const OpeningPage: React.FC<OpeningPageProps> = ({
         {/* Interactive Scroll / Click To Discover Button */}
         <button
           onClick={handleExplore}
+          aria-label="Scroll down or click to explore clinic services"
           className="group flex flex-col items-center gap-1.5 cursor-pointer py-1 px-4 rounded-xl hover:bg-white/5 transition-all text-slate-300 hover:text-[#F5D77F]"
         >
           <div className="w-6 h-10 rounded-full border-2 border-[#D4AF37] p-1 flex justify-center shadow-[0_0_12px_rgba(212,175,55,0.3)]">
@@ -281,6 +296,6 @@ export const OpeningPage: React.FC<OpeningPageProps> = ({
           <span>© {new Date().getFullYear()} Kynexis Health. All Rights Reserved.</span>
         </div>
       </footer>
-    </div>
+    </main>
   );
 };

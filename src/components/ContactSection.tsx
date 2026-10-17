@@ -195,10 +195,11 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                 <form onSubmit={handleSubmit} className="space-y-4">
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1">
+                      <label htmlFor="contact-full-name" className="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1">
                         Full Name *
                       </label>
                       <input
+                        id="contact-full-name"
                         type="text"
                         required
                         value={formData.name}
@@ -209,10 +210,11 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                     </div>
 
                     <div>
-                      <label className="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1">
+                      <label htmlFor="contact-phone-number" className="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1">
                         Phone Number *
                       </label>
                       <input
+                        id="contact-phone-number"
                         type="tel"
                         required
                         value={formData.phone}
@@ -225,10 +227,11 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1">
+                      <label htmlFor="contact-email-address" className="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1">
                         Email Address *
                       </label>
                       <input
+                        id="contact-email-address"
                         type="email"
                         required
                         value={formData.email}
@@ -239,10 +242,11 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                     </div>
 
                     <div>
-                      <label className="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1">
+                      <label htmlFor="contact-department" className="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1">
                         Department of Interest
                       </label>
                       <select
+                        id="contact-department"
                         value={formData.specialty}
                         onChange={(e) => setFormData({ ...formData, specialty: e.target.value })}
                         className="w-full px-4 py-2.5 text-xs bg-slate-50 border border-slate-300 rounded-xl focus:ring-2 focus:ring-[#D4AF37] focus:outline-none"
@@ -257,10 +261,11 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                   </div>
 
                   <div>
-                    <label className="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1">
+                    <label htmlFor="contact-preferred-date" className="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1">
                       Preferred Date (Optional)
                     </label>
                     <input
+                      id="contact-preferred-date"
                       type="date"
                       value={formData.preferredDate}
                       onChange={(e) => setFormData({ ...formData, preferredDate: e.target.value })}
@@ -269,10 +274,11 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                   </div>
 
                   <div>
-                    <label className="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1">
+                    <label htmlFor="contact-message-body" className="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1">
                       Message / Question
                     </label>
                     <textarea
+                      id="contact-message-body"
                       rows={3}
                       value={formData.message}
                       onChange={(e) => setFormData({ ...formData, message: e.target.value })}

@@ -115,6 +115,7 @@ export const FeaturedTreatments: React.FC<FeaturedTreatmentsProps> = ({
               </div>
               <button
                 onClick={() => setSelectedService(null)}
+                aria-label="Close treatment walkthrough"
                 className="p-2 rounded-lg text-slate-400 hover:text-white hover:bg-white/10"
               >
                 <X className="w-5 h-5" />

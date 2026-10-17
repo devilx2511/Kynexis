@@ -1,0 +1,18 @@
+{
+  "short_name": "Kynexis Health",
+  "name": "Kynexis Health Multi-Specialty Clinic",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "type": "image/svg+xml",
+      "sizes": "192x192 512x512",
+      "purpose": "any maskable"
+    }
+  ],
+  "start_url": "/",
+  "background_color": "#06111E",
+  "theme_color": "#112233",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "description": "Comprehensive, patient-centered multi-specialty healthcare and diagnostic clinic in Kolkata."
+}

@@ -124,6 +124,7 @@ export const SpecialtiesSection: React.FC<SpecialtiesSectionProps> = ({
               </div>
               <button
                 onClick={() => setSelectedSpecialty(null)}
+                aria-label="Close specialty details"
                 className="p-2 rounded-lg text-slate-400 hover:text-white hover:bg-white/10"
               >
                 <X className="w-5 h-5" />

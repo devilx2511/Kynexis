@@ -43,6 +43,7 @@ export const Footer: React.FC<FooterProps> = ({
                 setActiveTab('home');
                 window.scrollTo({ top: 0, behavior: 'smooth' });
               }}
+              aria-label="Kynexis Health homepage"
               className="text-left focus:outline-none"
             >
               <BrandLogo size="lg" variant="light" />
